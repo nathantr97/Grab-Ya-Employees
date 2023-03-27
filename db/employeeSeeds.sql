@@ -1,6 +1,6 @@
 USE company;
 
-INSERT INTO department (name)
+INSERT INTO departments (name)
 VALUES
 ("Management"),
 ("Sales"),
@@ -14,7 +14,7 @@ VALUES
 ("Stock Lead", 50000, 3),
 ("Legal Team", 70000, 4);
 
-INSERT INTO employees (first_name, last_name, role_id)
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES
 ("Nick", "Johnson", 1),
 ("Jira", "Hilton", 2),
