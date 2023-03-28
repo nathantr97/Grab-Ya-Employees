@@ -1,4 +1,5 @@
-const db= require("./config/connection");
+
+const db= require("./db/connection");
 const express = require("express");
 const appTrigger = require("./index");
 const PORT = process.env.PORT || 3001;

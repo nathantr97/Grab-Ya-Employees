@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const db= require("./config/connection");
+const db= require("./db/connection");
 require('console.table');
 
 //use inquirer to create prompts for user's selections
@@ -67,7 +67,7 @@ const appTrigger= () => {
 // create functions for openDepts, openRoles, openEmployees, updateRole, updateManager
 // 1. openDepts
 const openDepts = () => {
-    const sql= "SELECT * FROM departments";
+    const sql= `SELECT * FROM departments`;
     db.query(sql, (err, rows) => {
         if (err) {
             throw err;
