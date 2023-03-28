@@ -1,5 +1,4 @@
-USE company;
-
+USE company_db;
 INSERT INTO departments (name)
 VALUES
 ("Management"),
@@ -16,9 +15,9 @@ VALUES
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES
-("Nick", "Johnson", 1),
-("Jira", "Hilton", 2),
-("Yuna", "Lee", 3),
-("Jessica", "Lu", 4)
-("Jonas", "Brien", 2)
-("Frank", "Zhang", 4);
+("Nick", "Johnson", 1, 1),
+("Jira", "Hilton", 2, 1),
+("Yuna", "Lee", 3, 1),
+("Jessica", "Lu", 4, null),
+("Jonas", "Brien", 2, 1),
+("Frank", "Zhang", 4, null);

@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
-const db= require("/config/connection.js");
-const table = require('console.table');
+const db= require("./config/connection");
+require('console.table');
 
 //use inquirer to create prompts for user's selections
 const appTrigger= () => {
