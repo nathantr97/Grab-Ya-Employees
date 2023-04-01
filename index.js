@@ -111,7 +111,7 @@ const openEmployees = () => {
     roles.title AS title,
     roles.salary AS salary,
     departments.name AS department,
-    + (manager.first_name, " ", manager.last_name) AS manager
+    CONCAT (manager.first_name, " ", manager.last_name) AS manager
     FROM employees
     LEFT JOIN roles ON employees.role_id =roles.id
     LEFT JOIN departments ON roles.department_id = departments.id
@@ -196,6 +196,86 @@ const addRole = () => {
    });
 };
 
+const addEmployee = () => {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "firstName",
+            message: "Please enter employee's first name!",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log("please enter employee's first name");
+                    return false;
+                };
+                }
+            },{
+            type: "input",
+            name: "lastName",
+            message: "Please enter employee's last name?",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log("Please enter employee's last name");
+                    return false;
+                };
+            }
+         }
+        ])
+        .then(answer => {
+            const params = [answer.firstName, answer.lastName];
+            const sql =  `SELECT * FROM roles`;
+            db.query(sql, (err, row) => {
+                if (err) {
+                    throw err;
+                }
+            const roles = row.map(({title, id}) => ({name: title, value: id}));
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "role",
+                    message: "Which role would you like to assign this employee to?",
+                    choices: roles
+                }
+            ])
+            .then(roleAnswer => {
+                const role = roleAnswer.role;
+                params.push(role);
+                const sql = `SELECT * FROM employees`;
+                db.query(sql, (err,rows) => {
+                    if (err) {
+                        throw err;
+                    }
+                const managers =rows.map(({first_name, last_name, id}) => ({name: `${first_name} ${last_name}`, value: id}));
+                managers.push({name: "No manager", value: null});
+                inquirer.prompt([
+                    {
+                        type: "list",
+                        name: "manager",
+                        message: "Please assign this employee to a manager!",
+                        choices: managers
+                    }
+                ])
+                .then (managerAnswer => {
+                    const manager = managerAnswer.manager;
+                    params.push(manager);
+                    const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id)
+                    VALUE (?, ?, ? ?)`;
+                    db.query(sql, params, (err) => {
+                        if (err) {
+                            throw err;
+                        }
+                    console.log("A new employee has been added!");
+                        return openEmployees();
+                    });
+                });
+            }); 
+                });
+            });
+        });
+};
 
 
 
