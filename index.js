@@ -330,6 +330,59 @@ const roleUpdate = () => {
     });
 };
 
+// function update employee's manager go here 
+
+const updateManager =() => {
+    const sql = `SELECT first_name, last_name, id FROM employees`
+    db.query(sql, (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        const employees = rows.map(({first_name, last_name, id}) => ({name: `${first_name} ${last_name}`, value: id}));
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "employee",
+                messasge: "Please select an employee to update their manager?"
+                choices: employees
+            }
+        ])
+        .then(employeeAnswer => {
+            const employee =employeeAnswer.employee;
+            const params = [employee];
+            const sql = `SELECT first_name, last_name, id FROM employees`;
+            db.query(sql, (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+            const managers = rows.map(({first_name, last_name, id}) => ({name: `${first_name} ${last_name}`, value: id}));
+            managers.push({name: "No manager", value: null});
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "manager",
+                    message: "Please assign a new manager to the selected employee",
+                    choices: managers
+                }
+            ])
+        .then(managerAnswer => {
+            const manager =managerAnswer.manager;
+            params.unshift(manager);
+            const sql = `UPDATE employees
+                        SET manager_id = ?
+                        WHERE id = ?`
+            db.query(sql, params, (err) => {
+                if(err) {
+                    throw err;
+                }
+                console.log("A new manager has been assigned to this employee!");
+                return openEmployees();
+            });
+        });
+            });
+        });
+    });
+};
 
 
 
