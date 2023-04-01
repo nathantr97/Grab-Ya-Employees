@@ -1,4 +1,4 @@
-USE company;
+USE company_db;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS employees;

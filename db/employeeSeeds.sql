@@ -1,4 +1,4 @@
-USE company;
+USE company_db;
 INSERT INTO departments (name)
 VALUES
 ("Management"),

@@ -87,7 +87,7 @@ const openRoles = () => {
     roles.id,
     roles.title,
     roles.slary,
-    departments.name AS departments 
+    departments.name AS department 
     FROM roles
     LEFT JOIN departments ON roles.department_id =departments.id`;
     db.query(sql, (err, rows) => {
@@ -343,7 +343,7 @@ const updateManager =() => {
             {
                 type: "list",
                 name: "employee",
-                messasge: "Please select an employee to update their manager?"
+                messasge: "Please select an employee to update their manager?",
                 choices: employees
             }
         ])
