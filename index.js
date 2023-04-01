@@ -277,6 +277,59 @@ const addEmployee = () => {
         });
 };
 
+// update employee's role function go here
+
+const roleUpdate = () => {
+    const sql = `SELECT first_name, last_name, id FROM employees`
+    db.query(sql, (err, rows) => {
+        if (err) {
+            throw err;
+        }
+    const employees = rows.map(({first_name, last_name, id}) => ({name: `${first_name} ${last_name}`, value: id}));
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "employee",
+            message: "Please select an employee to update their role",
+            choices: employees
+        }
+    ])
+    .then(employeeAnswer => {
+        const employee = employeeAnswer.employee;
+        const params= [employee];
+        const sql = `SELECT title, id FROM roles`;
+        db.query(sql, (err, rows) => {
+            if (err) {
+                throw err;
+            }
+        const roles = rows.map(({title, id}) =>({name: title, value: id}));
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "role",
+                message: "Please select a new role for this employee",
+                choices: roles
+            }
+        ])
+        .then(roleAnswer => {
+            const role = roleAnswer.role;
+            params.unshift(role);
+            const sql = `UPDATE employees
+                        SET role_id = ?
+                        WHERE id = ?`
+        db.query(sql, params, (err) => {
+            if (err) {
+                throw err;
+            }
+            console.log("Employee's role has been updated!");
+            return openEmployees();
+        });
+        });
+        });
+    });
+    });
+};
+
 
 
 
