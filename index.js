@@ -137,7 +137,7 @@ const addDept = () => {
         }
     ])
 .then(newDept => {
-    const sql = "INSERT INTO departments (name) VALUES (?)";
+    const sql = `INSERT INTO departments (name) VALUES (?)`;
     const params =newDept.name;
     db.query(sql, params, (err) => {
         if (err) {
@@ -166,7 +166,7 @@ const addRole = () => {
     ])
 .then (newRole => {
     const params = [newRole.title, newRole.salary];
-    const sql = "SELECT * FROM departments";
+    const sql = `SELECT * FROM departments`;
     db.query(sql, (err, rows) => {
         if (err) {
             throw err;
@@ -183,7 +183,7 @@ const addRole = () => {
     .then(departmentSelect => {
         const department = departmentSelect.department;
         params.push(department);
-        const sql = "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)";
+        const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
         db.query(sql, params, (err) => {
             if (err) {
                 throw err;
@@ -279,7 +279,7 @@ const addEmployee = () => {
 
 // update employee's role function go here
 
-const roleUpdate = () => {
+const updateRole = () => {
     const sql = `SELECT first_name, last_name, id FROM employees`
     db.query(sql, (err, rows) => {
         if (err) {
