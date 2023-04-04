@@ -8,16 +8,22 @@ VALUES
 
 INSERT INTO roles (title, salary, department_id)
 VALUES
-("Store Manager", 100000, 1),
+("District Manager", 200000, 1),
+("General Manager", 150000, 1),
+("Store Manager", 100000, 2),
 ("Sales Lead", 80000, 2),
 ("Stock Lead", 50000, 3),
-("Legal Team", 70000, 4);
+("Legal Team", 70000, 4),
+("Stock associate", 20000, 4);
 
-INSERT INTO employees (first_name, last_name, role_id, manager_id)
+INSERT INTO employees (first_name, last_name, role_id)
 VALUES
-("Nick", "Johnson", 1, 1),
-("Jira", "Hilton", 2, 1),
-("Yuna", "Lee", 3, 1),
-("Jessica", "Lu", 4, null),
-("Jonas", "Brien", 2, 1),
-("Frank", "Zhang", 4, null);
+("Nick", "Johnson", 1),
+("Jira", "Hilton", 2),
+("Yuna", "Lee", 3),
+("Jessica", "Lu", 4),
+("Jonas", "Brien", 5),
+("Frank", "Zhang", 6),
+("Tiara", "Kim", 7),
+("Luke", "Marchant", 5),
+("Meagan", "Ang", 4);

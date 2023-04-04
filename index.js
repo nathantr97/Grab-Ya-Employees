@@ -82,14 +82,12 @@ const openDepts = () => {
 // 2. openRoles
 
 const openRoles = () => {
-    const sql= 
-    `SELECT 
-    roles.id,
-    roles.title,
-    roles.slary,
-    departments.name AS department 
-    FROM roles
-    LEFT JOIN departments ON roles.department_id =departments.id`;
+    const sql= `SELECT  roles.id,
+                        roles.title,
+                        roles.salary,
+                        departments.name AS department 
+                    FROM roles
+                    LEFT JOIN departments ON roles.department_id =departments.id`;
     db.query(sql, (err, rows) => {
         if (err) {
             throw err;
@@ -132,13 +130,21 @@ const addDept = () => {
     return inquirer.prompt([
         {
             type: "input",
-            name: "deptName",
+            name: "name",
             message: "What would you like the new department to be called?",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log("Please enter a name for department!");
+                    return false;
+                };
+            }
         }
     ])
-.then(newDept => {
-    const sql = `INSERT INTO departments (name) VALUES (?)`;
-    const params =newDept.name;
+.then(answer => {
+    const sql = `INSERT INTO departments (name) VALUES(?) `;
+    const params =answer.name;
     db.query(sql, params, (err) => {
         if (err) {
             throw err;
