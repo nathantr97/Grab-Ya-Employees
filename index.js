@@ -268,8 +268,7 @@ const addEmployee = () => {
                 .then (managerAnswer => {
                     const manager = managerAnswer.manager;
                     params.push(manager);
-                    const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id)
-                    VALUE (?, ?, ? ?)`;
+                    const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUE (?, ?, ?, ?)`;
                     db.query(sql, params, (err) => {
                         if (err) {
                             throw err;
