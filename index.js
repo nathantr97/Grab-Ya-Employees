@@ -171,7 +171,7 @@ const addRole = () => {
         }
     ])
 .then (newRole => {
-    const params = [newRole.title, newRole.salary];
+    const params = [newRole.roleTitle, newRole.salary];
     const sql = `SELECT * FROM departments`;
     db.query(sql, (err, rows) => {
         if (err) {
@@ -189,6 +189,7 @@ const addRole = () => {
     .then(departmentSelect => {
         const department = departmentSelect.department;
         params.push(department);
+        console.log(params);
         const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
         db.query(sql, params, (err) => {
             if (err) {
