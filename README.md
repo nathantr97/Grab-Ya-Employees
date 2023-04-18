@@ -6,11 +6,11 @@ The motivation behind this project was to create an appplication using nodejs an
 
 ## Table of Contents
 
--[Installation](#installation)
--[Usage](#usage)
--[Links](#links)
--[Credits](#credits)
--[License](#license)
+-   [Installation](#installation)
+-   [Usage](#usage)
+-   [Links](#links)
+-   [Credits](#credits)
+-   [License](#license)
 
 ## Installation
 
@@ -25,17 +25,20 @@ The motivation behind this project was to create an appplication using nodejs an
 <li> Then, run command "mysql -u root -p" to gain access to mysql </li>
 <li> Next, run the following commands: <br>
 source db/db.sql <br>
-source db/schema.sql
+source db/schema.sql <br>
 source db/employeeSeeds.sql <br> </li>
 <li> Database will be created upon completing the steps above and use arrow keys to navigate through database information </li>
 
+## Link/Demo
 
+https://drive.google.com/file/d/1eD6x_dMX9zcZRQbjV3RrpiwthReyyW3h/view
 
-
-
-## Links
-
+![example-of-tables](/example.png)
 
 ## Credits
 
+<li> Nathan T
+
 ## License
+
+N/A
